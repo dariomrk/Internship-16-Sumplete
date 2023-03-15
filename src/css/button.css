@@ -1,0 +1,7 @@
+button {
+  background-color: unset;
+  border: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
