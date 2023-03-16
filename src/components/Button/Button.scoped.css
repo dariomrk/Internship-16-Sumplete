@@ -1,0 +1,32 @@
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 64px;
+  min-height: 32px;
+  border: 0;
+  font-weight: 600;
+  transition: all 200ms ease;
+  box-shadow: var(--box-shadow-2);
+  filter: grayscale(0.1);
+  color: white;
+  background-color: var(--accent);
+  cursor: pointer;
+}
+
+button:hover {
+  filter: grayscale(0) saturate(1.2);
+}
+
+button:active {
+  box-shadow: none;
+}
+
+.danger {
+  background-color: var(--accent-danger);
+}
+
+.success {
+  background-color: var(--accent-success);
+}
