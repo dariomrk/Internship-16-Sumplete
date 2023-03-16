@@ -6,14 +6,14 @@ function Board({ }) {
   return (
     <div className="board">
       <div className="column-sums">
-        <Cell content={1} disabled="true" />
-        <Cell content={2} disabled="true" />
-        <Cell content={3} disabled="true" />
+        <Cell content={1} state="disabled" />
+        <Cell content={2} state="disabled" />
+        <Cell content={3} state="disabled" />
       </div>
       <div className="row-sums">
-        <Cell content={4} disabled="true" />
-        <Cell content={5} disabled="true" />
-        <Cell content={6} disabled="true" />
+        <Cell content={4} state="disabled" />
+        <Cell content={5} state="disabled" />
+        <Cell content={6} state="disabled" />
       </div>
       <div className="playable">
         <Cell content={-1} />

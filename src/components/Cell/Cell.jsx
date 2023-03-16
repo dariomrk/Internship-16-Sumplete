@@ -1,17 +1,24 @@
 import React from 'react';
 import './Cell.scoped.css';
-import useInfiniteIterator from '../../hooks/useInfiniteIterator';
 
-function Cell({ content, disabled, callback }) {
-  const [current, next] = useInfiniteIterator(['', 'keep', 'delete']);
-
+/**
+ * @param {{
+ * content: string,
+ * identifier: any,
+ * state: undefined | 'keep' | 'delete' | 'disabled',
+ * callback: (identifier: any) => void
+ * }} props
+ * @returns {JSX.Element}
+ */
+function Cell({
+  content, identifier, state, callback,
+}) {
   return (
     <button
       type="button"
-      disabled={disabled}
-      className={(!disabled ? current : 'disabled')}
+      className={state}
       onClick={() => {
-        callback(next());
+        callback(identifier);
       }}
     >
       {content}
