@@ -1,0 +1,41 @@
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "column-sums column-sums column-sums none"
+    "playable playable playable row-sums"
+    "playable playable playable row-sums"
+    "playable playable playable row-sums";
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.column-sums {
+  grid-area: column-sums;
+  flex-direction: row;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+}
+
+.row-sums {
+  grid-area: row-sums;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+}
+
+.playable {
+  grid-area: playable;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 1px solid var(--dark);
+  width: fit-content;
+  height: fit-content;
+}

@@ -2,13 +2,14 @@ import React from 'react';
 import './Cell.scoped.css';
 import useInfiniteIterator from '../../hooks/useInfiniteIterator';
 
-function Cell({ content, callback }) {
+function Cell({ content, disabled, callback }) {
   const [current, next] = useInfiniteIterator(['', 'keep', 'delete']);
 
   return (
     <button
       type="button"
-      className={current}
+      disabled={disabled}
+      className={(!disabled ? current : 'disabled')}
       onClick={() => {
         callback(next());
       }}

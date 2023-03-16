@@ -1,15 +1,9 @@
 import React from 'react';
-import Cell from './components/Cell';
-import Button from './components/Button/Button';
+import Board from './components/Board/Board';
 
 function App() {
   return (
-    <>
-      <Cell content="cell" />
-      <Button content="button" />
-      <Button content="button" type="success" />
-      <Button content="button" type="danger" />
-    </>
+    <Board />
   );
 }
 
