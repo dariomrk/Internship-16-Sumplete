@@ -1,9 +1,9 @@
 import React from 'react';
 import './Cell.scoped.css';
-import useNext from '../../hooks/useNext';
+import useInfiniteIterator from '../../hooks/useInfiniteIterator';
 
 function Cell({ content, callback }) {
-  const [current, next] = useNext(['', 'keep', 'delete']);
+  const [current, next] = useInfiniteIterator(['', 'keep', 'delete']);
 
   return (
     <button
