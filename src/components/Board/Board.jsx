@@ -1,30 +1,58 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import './Board.scoped.css';
 import Cell from '../Cell';
 
-function Board({ }) {
+/**
+ * @param {{cells: {content: number, state: string}[][]}} props
+ * @returns {JSX.Element}
+ */
+function Board({ cells }) {
+  const columSumValues = () => cells.reduce((acc, row) => {
+    row.forEach((cell, index) => {
+      acc[index] += cell.content;
+    });
+    return acc;
+  }, Array.from({ length: cells[0].length }, () => 0));
+
+  const rowSumValues = () => cells.map((row) => row
+    .reduce((acc, cell) => acc + cell.content, 0));
+
   return (
     <div className="board">
       <div className="column-sums">
-        <Cell content={1} state="disabled" />
-        <Cell content={2} state="disabled" />
-        <Cell content={3} state="disabled" />
+        {columSumValues().map((content, x) => (
+          <Cell
+            content={content}
+            state="disabled"
+            identifier={{ x, sumCell: true }}
+            key={`col-sum-${x}`}
+          />
+        ))}
       </div>
       <div className="row-sums">
-        <Cell content={4} state="disabled" />
-        <Cell content={5} state="disabled" />
-        <Cell content={6} state="disabled" />
+        {rowSumValues().map((content, y) => (
+          <Cell
+            content={content}
+            state="disabled"
+            identifier={{ y, sumCell: true }}
+            key={`row-sum-${y}`}
+          />
+        ))}
       </div>
       <div className="playable">
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
-        <Cell content={-1} />
+        {cells.map((row, y) => (
+          <React.Fragment key={`row-${y}`}>
+            {row.map(({ content, state }, x) => (
+              <Cell
+                content={content}
+                state={state}
+                identifier={{ x, y, sumCell: false }}
+                key={`cell-${x}-${y}`}
+              />
+            ))}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
