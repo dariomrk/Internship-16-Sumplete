@@ -2,14 +2,26 @@ import React from 'react';
 import Board from './components/Board/Board';
 
 function App() {
-  const cells = [
-    [{ content: 1, state: '' }, { content: 2, state: '' }, { content: 3, state: '' }],
-    [{ content: 4, state: '' }, { content: 5, state: '' }, { content: 6, state: '' }],
-    [{ content: 7, state: '' }, { content: 8, state: '' }, { content: 9, state: '' }],
+  const cellState = [
+    [
+      { content: 1, state: '', key: crypto.randomUUID() },
+      { content: 2, state: '', key: crypto.randomUUID() },
+      { content: 3, state: '', key: crypto.randomUUID() },
+    ],
+    [
+      { content: 4, state: '', key: crypto.randomUUID() },
+      { content: 5, state: '', key: crypto.randomUUID() },
+      { content: 6, state: '', key: crypto.randomUUID() },
+    ],
+    [
+      { content: 7, state: '', key: crypto.randomUUID() },
+      { content: 8, state: '', key: crypto.randomUUID() },
+      { content: 9, state: '', key: crypto.randomUUID() },
+    ],
   ];
 
   return (
-    <Board cells={cells} />
+    <Board cells={cellState} callback={(id) => console.log(id)} />
   );
 }
 

@@ -4,10 +4,17 @@ import './Board.scoped.css';
 import Cell from '../Cell';
 
 /**
- * @param {{cells: {content: number, state: string}[][]}} props
+ * @param {{
+ * cells: {
+ *  content: number,
+ *  state: string,
+ *  key: string
+ * }[][],
+ * callback: (id: string) => void}} props
  * @returns {JSX.Element}
  */
-function Board({ cells }) {
+function Board({ cells, callback }) {
+  // #region component logic
   const columSumValues = () => cells.reduce((acc, row) => {
     row.forEach((cell, index) => {
       acc[index] += cell.content;
@@ -17,38 +24,37 @@ function Board({ cells }) {
 
   const rowSumValues = () => cells.map((row) => row
     .reduce((acc, cell) => acc + cell.content, 0));
-
+  // #endregion
   return (
     <div className="board">
       <div className="column-sums">
-        {columSumValues().map((content, x) => (
+        {columSumValues().map((content, i) => (
           <Cell
             content={content}
             state="disabled"
-            identifier={{ x, sumCell: true }}
-            key={`col-sum-${x}`}
+            key={`colum-sum-${i}`}
           />
         ))}
       </div>
       <div className="row-sums">
-        {rowSumValues().map((content, y) => (
+        {rowSumValues().map((content, i) => (
           <Cell
             content={content}
             state="disabled"
-            identifier={{ y, sumCell: true }}
-            key={`row-sum-${y}`}
+            key={`row-sum-${i}`}
           />
         ))}
       </div>
       <div className="playable">
-        {cells.map((row, y) => (
-          <React.Fragment key={`row-${y}`}>
-            {row.map(({ content, state }, x) => (
+        {cells.map((row, i) => (
+          <React.Fragment key={`row-${i}`}>
+            {row.map(({ content, state, key }) => (
               <Cell
                 content={content}
                 state={state}
-                identifier={{ x, y, sumCell: false }}
-                key={`cell-${x}-${y}`}
+                id={key}
+                key={key}
+                callback={callback}
               />
             ))}
           </React.Fragment>

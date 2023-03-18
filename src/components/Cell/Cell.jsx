@@ -4,21 +4,21 @@ import './Cell.scoped.css';
 /**
  * @param {{
  * content: string,
- * identifier: {x: number, y: number, sumCell: boolean},
+ * id: string,
  * state: undefined | 'keep' | 'delete' | 'disabled',
- * callback: (identifier: {x: number, y: number, sumCell: boolean}) => void
+ * callback: (id: string) => void
  * }} props
  * @returns {JSX.Element}
  */
 function Cell({
-  content, identifier, state, callback,
+  content, id, state, callback,
 }) {
   return (
     <button
       type="button"
       className={state}
       onClick={() => {
-        if (state !== 'disabled') { callback(identifier); }
+        if (state !== 'disabled') { callback(id); }
       }}
     >
       {content}
