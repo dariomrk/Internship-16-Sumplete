@@ -25,17 +25,17 @@ function App() {
     });
     return acc;
   }, Array.from({ length: cellStates[0].length }, () => 0))
-    .map((value) => ({ value }));
+    .map((value) => ({ value, id: crypto.randomUUID() }));
 
   const getHorizontalSumStates = () => cellStates.map((row) => row
     .reduce((acc, cell) => acc + cell.value, 0))
-    .map((value) => ({ value }));
+    .map((value) => ({ value, id: crypto.randomUUID() }));
 
   return (
     <Board
       cellStates={cellStates}
-      sumStatesVertical={getVerticalSumStates()}
-      sumStatesHorizontal={getHorizontalSumStates()}
+      sumsVertical={getVerticalSumStates()}
+      sumsHorizontal={getHorizontalSumStates()}
       callback={(id) => console.log(id)}
     />
   );

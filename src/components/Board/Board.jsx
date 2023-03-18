@@ -2,6 +2,7 @@
 import React from 'react';
 import './Board.scoped.css';
 import Cell from '../Cell';
+import SumCells from '../SumCells';
 
 /**
  * @param {{
@@ -10,15 +11,15 @@ import Cell from '../Cell';
  *  state: string,
  *  id: string
  * }[][],
- * sumStatesVertical: {value: number}[],
- * sumStatesHorizontal: {value: number}[],
+ * sumsVertical: {value: number, id: string}[],
+ * sumsHorizontal: {value: number, id: string}[],
  * callback: (id: string) => void}} props
  * @returns {JSX.Element}
  */
 function Board({
   cellStates,
-  sumStatesVertical,
-  sumStatesHorizontal,
+  sumsVertical,
+  sumsHorizontal,
   callback,
 }) {
   return (
@@ -28,7 +29,7 @@ function Board({
           {cellStates.map((row, i) => (
             <div
               className="cells-row"
-              key={`cells-row-${i}`}
+              key={`row-${i}`}
             >
               {row.map(({ value, state, id }) => (
                 <Cell
@@ -42,26 +43,9 @@ function Board({
             </div>
           ))}
         </div>
-        <div className="cells-sum-horizontal">
-          {sumStatesHorizontal.map(({ value }, i) => (
-            <Cell
-              value={value}
-              state="disabled"
-              key={`sum-horizontal-${i}`}
-            />
-          ))}
-        </div>
+        <SumCells cells={sumsHorizontal} direction="column" />
       </div>
-      <div className="cells-sum-vertical">
-        {sumStatesVertical.map(({ value }, i) => (
-          <Cell
-            value={value}
-            state="disabled"
-            key={`sum-vertical-${i}`}
-          />
-        ))}
-        <Cell state="disabled" />
-      </div>
+      <SumCells cells={sumsVertical} direction="row" />
     </div>
   );
 }
