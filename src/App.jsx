@@ -1,42 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Board from './components/Board/Board';
+import {
+  generateInitialCellStates, getVerticalSums, getHorizontalSums, getNextCellState,
+} from './functions/game';
 
 function App() {
-  const cellStates = [
-    [
-      { value: 1, state: '', id: crypto.randomUUID() },
-      { value: 2, state: '', id: crypto.randomUUID() },
-      { value: 3, state: '', id: crypto.randomUUID() },
-    ],
-    [
-      { value: 4, state: '', id: crypto.randomUUID() },
-      { value: 5, state: '', id: crypto.randomUUID() },
-      { value: 6, state: '', id: crypto.randomUUID() },
-    ],
-    [
-      { value: 7, state: '', id: crypto.randomUUID() },
-      { value: 8, state: '', id: crypto.randomUUID() },
-      { value: 9, state: '', id: crypto.randomUUID() },
-    ],
-  ];
-  const getVerticalSumStates = () => cellStates.reduce((acc, row) => {
-    row.forEach((cell, index) => {
-      acc[index] += cell.value;
-    });
-    return acc;
-  }, Array.from({ length: cellStates[0].length }, () => 0))
-    .map((value) => ({ value, id: crypto.randomUUID() }));
+  const [cellStates, setCellStates] = useState(generateInitialCellStates(3, 3));
 
-  const getHorizontalSumStates = () => cellStates.map((row) => row
-    .reduce((acc, cell) => acc + cell.value, 0))
-    .map((value) => ({ value, id: crypto.randomUUID() }));
+  const handleCellStateUpdate = (id) => {
+    const newCellStates = [...cellStates];
+    newCellStates.forEach((row, i) => {
+      row.forEach((cell, j) => {
+        if (cell.id === id) {
+          const newCell = { ...cell, state: getNextCellState(cell.state) };
+          newCellStates[i][j] = newCell;
+        }
+      });
+    });
+    setCellStates(newCellStates);
+  };
 
   return (
     <Board
       cellStates={cellStates}
-      sumsVertical={getVerticalSumStates()}
-      sumsHorizontal={getHorizontalSumStates()}
-      callback={(id) => console.log(id)}
+      sumsVertical={getVerticalSums(cellStates, false)
+        .map((value, i) => ({ value, id: `vertical-${i}` }))}
+      sumsHorizontal={getHorizontalSums(cellStates, false)
+        .map((value, i) => ({ value, id: `horizontal-${i}` }))}
+      callback={handleCellStateUpdate}
     />
   );
 }
