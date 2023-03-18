@@ -5,55 +5,51 @@ import Cell from '../Cell';
 
 /**
  * @param {{
- * cells: {
- *  content: number,
+ * cellStates: {
+ *  value: number,
  *  state: string,
- *  key: string
+ *  id: string
  * }[][],
+ * columnSumStates: {value: number}[],
+ * rowSumStates: {value: number}[],
  * callback: (id: string) => void}} props
  * @returns {JSX.Element}
  */
-function Board({ cells, callback }) {
-  // #region component logic
-  const columSumValues = () => cells.reduce((acc, row) => {
-    row.forEach((cell, index) => {
-      acc[index] += cell.content;
-    });
-    return acc;
-  }, Array.from({ length: cells[0].length }, () => 0));
-
-  const rowSumValues = () => cells.map((row) => row
-    .reduce((acc, cell) => acc + cell.content, 0));
-  // #endregion
+function Board({
+  cellStates,
+  columnSumStates,
+  rowSumStates,
+  callback,
+}) {
   return (
     <div className="board">
       <div className="column-sums">
-        {columSumValues().map((content, i) => (
+        {columnSumStates.map(({ value }, i) => (
           <Cell
-            content={content}
+            value={value}
             state="disabled"
             key={`colum-sum-${i}`}
           />
         ))}
       </div>
       <div className="row-sums">
-        {rowSumValues().map((content, i) => (
+        {rowSumStates.map(({ value }, i) => (
           <Cell
-            content={content}
+            value={value}
             state="disabled"
             key={`row-sum-${i}`}
           />
         ))}
       </div>
       <div className="playable">
-        {cells.map((row, i) => (
+        {cellStates.map((row, i) => (
           <React.Fragment key={`row-${i}`}>
-            {row.map(({ content, state, key }) => (
+            {row.map(({ value, state, id }) => (
               <Cell
-                content={content}
+                value={value}
                 state={state}
-                id={key}
-                key={key}
+                id={id}
+                key={id}
                 callback={callback}
               />
             ))}

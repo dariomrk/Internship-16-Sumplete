@@ -3,7 +3,7 @@ import './Cell.scoped.css';
 
 /**
  * @param {{
- * content: string,
+ * value: string | number,
  * id: string,
  * state: undefined | 'keep' | 'delete' | 'disabled',
  * callback: (id: string) => void
@@ -11,7 +11,7 @@ import './Cell.scoped.css';
  * @returns {JSX.Element}
  */
 function Cell({
-  content, id, state, callback,
+  value, id, state, callback,
 }) {
   return (
     <button
@@ -21,7 +21,7 @@ function Cell({
         if (state !== 'disabled') { callback(id); }
       }}
     >
-      {content}
+      {value}
     </button>
   );
 }

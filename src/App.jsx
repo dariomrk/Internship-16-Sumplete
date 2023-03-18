@@ -2,26 +2,42 @@ import React from 'react';
 import Board from './components/Board/Board';
 
 function App() {
-  const cellState = [
+  const cellStates = [
     [
-      { content: 1, state: '', key: crypto.randomUUID() },
-      { content: 2, state: '', key: crypto.randomUUID() },
-      { content: 3, state: '', key: crypto.randomUUID() },
+      { value: 1, state: '', id: crypto.randomUUID() },
+      { value: 2, state: '', id: crypto.randomUUID() },
+      { value: 3, state: '', id: crypto.randomUUID() },
     ],
     [
-      { content: 4, state: '', key: crypto.randomUUID() },
-      { content: 5, state: '', key: crypto.randomUUID() },
-      { content: 6, state: '', key: crypto.randomUUID() },
+      { value: 4, state: '', id: crypto.randomUUID() },
+      { value: 5, state: '', id: crypto.randomUUID() },
+      { value: 6, state: '', id: crypto.randomUUID() },
     ],
     [
-      { content: 7, state: '', key: crypto.randomUUID() },
-      { content: 8, state: '', key: crypto.randomUUID() },
-      { content: 9, state: '', key: crypto.randomUUID() },
+      { value: 7, state: '', id: crypto.randomUUID() },
+      { value: 8, state: '', id: crypto.randomUUID() },
+      { value: 9, state: '', id: crypto.randomUUID() },
     ],
   ];
+  const getColumSumStates = () => cellStates.reduce((acc, row) => {
+    row.forEach((cell, index) => {
+      acc[index] += cell.value;
+    });
+    return acc;
+  }, Array.from({ length: cellStates[0].length }, () => 0))
+    .map((value) => ({ value }));
+
+  const getRowSumStates = () => cellStates.map((row) => row
+    .reduce((acc, cell) => acc + cell.value, 0))
+    .map((value) => ({ value }));
 
   return (
-    <Board cells={cellState} callback={(id) => console.log(id)} />
+    <Board
+      cellStates={cellStates}
+      columnSumStates={getColumSumStates()}
+      rowSumStates={getRowSumStates()}
+      callback={(id) => console.log(id)}
+    />
   );
 }
 
