@@ -3,8 +3,8 @@ import './Cell.scoped.css';
 
 /**
  * @param {{
- * value: string | number,
- * id: string,
+ * value: string | number | undefined,
+ * id: string | undefined,
  * state: undefined | 'keep' | 'delete' | 'disabled',
  * callback: (id: string) => void
  * }} props
