@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Board from './components/Board/Board';
 import {
-  generateInitialCellStates, getVerticalSums, getHorizontalSums, getNextCellState,
+  getVerticalSums,
+  getHorizontalSums,
+  getNextCellState,
+  setupCells,
 } from './functions/game';
 
 function App() {
-  const [cellStates, setCellStates] = useState(generateInitialCellStates(3, 3));
+  const [config, setConfig] = useState({
+    rows: 3,
+    columns: 3,
+    minValue: 1,
+    maxValue: 10,
+    minToDelete: 0.4,
+    maxToDelete: 0.6,
+  });
+  const [cellStates, setCellStates] = useState(setupCells(config));
 
   const handleCellStateUpdate = (id) => {
     const newCellStates = [...cellStates];
