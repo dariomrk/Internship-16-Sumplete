@@ -24,13 +24,3 @@
   display: flex;
   flex-direction: row;
 }
-
-.cells-sum-horizontal {
-  display: flex;
-  flex-direction: column;
-}
-
-.cells-sum-vertical {
-  display: flex;
-  flex-direction: row;
-}
