@@ -3,10 +3,10 @@ import './SumCells.scoped.css';
 import Cell from '../Cell';
 
 /**
- * @param {{cells:
- * {
+ * @param {{cells:{
  *  value: string | number,
- *  id: string,
+ *  id: 'keep' | 'delete' | undefined,
+ *  state: 'done' | undefined
  * },
  *  direction: 'row' | 'column'
  * }} props
@@ -15,11 +15,12 @@ import Cell from '../Cell';
 function SumCells({ cells, direction }) {
   return (
     <div style={{ flexDirection: direction }}>
-      {cells.map(({ value, id }) => (
+      {cells.map(({ value, id, state }) => (
         <Cell
           value={value}
-          state="disabled"
+          state={state}
           key={id}
+          disabled
         />
       ))}
     </div>

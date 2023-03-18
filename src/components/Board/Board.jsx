@@ -8,11 +8,19 @@ import SumCells from '../SumCells';
  * @param {{
  * cellStates: {
  *  value: number,
- *  state: string,
+ *  state: 'keep' | 'delete' | undefined,
  *  id: string
  * }[][],
- * sumsVertical: {value: number, id: string}[],
- * sumsHorizontal: {value: number, id: string}[],
+ * sumsVertical: {
+ *  value: number,
+ * id: string,
+ * state: 'done' | undefined
+ * }[],
+ * sumsHorizontal: {
+ *  value: number,
+ *  id: string,
+ *  state: 'done' | undefined
+ * }[],
  * callback: (id: string) => void}} props
  * @returns {JSX.Element}
  */
