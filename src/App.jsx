@@ -19,7 +19,7 @@ function App() {
       { value: 9, state: '', id: crypto.randomUUID() },
     ],
   ];
-  const getColumSumStates = () => cellStates.reduce((acc, row) => {
+  const getVerticalSumStates = () => cellStates.reduce((acc, row) => {
     row.forEach((cell, index) => {
       acc[index] += cell.value;
     });
@@ -27,15 +27,15 @@ function App() {
   }, Array.from({ length: cellStates[0].length }, () => 0))
     .map((value) => ({ value }));
 
-  const getRowSumStates = () => cellStates.map((row) => row
+  const getHorizontalSumStates = () => cellStates.map((row) => row
     .reduce((acc, cell) => acc + cell.value, 0))
     .map((value) => ({ value }));
 
   return (
     <Board
       cellStates={cellStates}
-      columnSumStates={getColumSumStates()}
-      rowSumStates={getRowSumStates()}
+      sumStatesVertical={getVerticalSumStates()}
+      sumStatesHorizontal={getHorizontalSumStates()}
       callback={(id) => console.log(id)}
     />
   );

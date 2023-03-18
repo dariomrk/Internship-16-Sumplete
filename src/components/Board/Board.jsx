@@ -10,51 +10,57 @@ import Cell from '../Cell';
  *  state: string,
  *  id: string
  * }[][],
- * columnSumStates: {value: number}[],
- * rowSumStates: {value: number}[],
+ * sumStatesVertical: {value: number}[],
+ * sumStatesHorizontal: {value: number}[],
  * callback: (id: string) => void}} props
  * @returns {JSX.Element}
  */
 function Board({
   cellStates,
-  columnSumStates,
-  rowSumStates,
+  sumStatesVertical,
+  sumStatesHorizontal,
   callback,
 }) {
   return (
     <div className="board">
-      <div className="column-sums">
-        {columnSumStates.map(({ value }, i) => (
+      <div className="board-row">
+        <div className="cells">
+          {cellStates.map((row, i) => (
+            <div
+              className="cells-row"
+              key={`cells-row-${i}`}
+            >
+              {row.map(({ value, state, id }) => (
+                <Cell
+                  value={value}
+                  state={state}
+                  id={id}
+                  key={id}
+                  callback={callback}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="cells-sum-horizontal">
+          {sumStatesHorizontal.map(({ value }, i) => (
+            <Cell
+              value={value}
+              state="disabled"
+              key={`sum-horizontal-${i}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="cells-sum-vertical">
+        {sumStatesVertical.map(({ value }, i) => (
           <Cell
             value={value}
             state="disabled"
-            key={`colum-sum-${i}`}
+            key={`sum-vertical-${i}`}
           />
         ))}
-      </div>
-      <div className="row-sums">
-        {rowSumStates.map(({ value }, i) => (
-          <Cell
-            value={value}
-            state="disabled"
-            key={`row-sum-${i}`}
-          />
-        ))}
-      </div>
-      <div className="playable">
-        {cellStates.map((row, i) => (
-          <React.Fragment key={`row-${i}`}>
-            {row.map(({ value, state, id }) => (
-              <Cell
-                value={value}
-                state={state}
-                id={id}
-                key={id}
-                callback={callback}
-              />
-            ))}
-          </React.Fragment>
-        ))}
+        <Cell state="disabled" />
       </div>
     </div>
   );
