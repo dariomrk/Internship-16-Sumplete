@@ -20,6 +20,7 @@ function Cell({
       onClick={() => {
         if (state !== 'disabled') { callback(id); }
       }}
+      disabled={state === 'disabled'}
     >
       {value}
     </button>
