@@ -8,4 +8,5 @@ export default defineConfig({
     react(),
     reactScopedCssPlugin(),
   ],
+  base: '/Internship-16-Sumplete/',
 });
