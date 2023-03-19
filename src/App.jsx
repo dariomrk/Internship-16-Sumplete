@@ -34,10 +34,8 @@ function App() {
   return (
     <Board
       cellStates={cellStates}
-      sumsVertical={getVerticalSums(cellStates, false)
-        .map((value, i) => ({ value, id: `vertical-${i}` }))}
-      sumsHorizontal={getHorizontalSums(cellStates, false)
-        .map((value, i) => ({ value, id: `horizontal-${i}` }))}
+      sumsVertical={getVerticalSums(cellStates)}
+      sumsHorizontal={getHorizontalSums(cellStates)}
       callback={handleCellStateUpdate}
     />
   );

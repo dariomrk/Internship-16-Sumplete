@@ -13,8 +13,8 @@ import SumCells from '../SumCells';
  * }[][],
  * sumsVertical: {
  *  value: number,
- * id: string,
- * state: 'done' | undefined
+ *  id: string,
+ *  state: 'done' | undefined
  * }[],
  * sumsHorizontal: {
  *  value: number,
