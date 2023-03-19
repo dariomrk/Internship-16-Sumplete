@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import Board from './components/Board/Board';
 import {
   getVerticalSums,
@@ -36,7 +36,8 @@ function App() {
       cellStates={cellStates}
       sumsVertical={getVerticalSums(cellStates)}
       sumsHorizontal={getHorizontalSums(cellStates)}
-      callback={handleCellStateUpdate}
+      cellClickedCallback={handleCellStateUpdate}
+      levelDoneCallback={() => {}}
     />
   );
 }

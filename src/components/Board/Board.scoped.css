@@ -20,6 +20,10 @@
   border: 1px solid var(--dark);
 }
 
+.done {
+  background-color: var(--accent-success--subtle);
+}
+
 .cells-row {
   display: flex;
   flex-direction: row;
