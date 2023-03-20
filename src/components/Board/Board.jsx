@@ -43,7 +43,7 @@ function Board({
   return (
     <div className="board">
       <div className="board-row">
-        <div className={`cells ${(levelDone ? 'done' : '')}`}>
+        <div className="cells">
           {cellStates.map((row, i) => (
             <div
               className="cells-row"

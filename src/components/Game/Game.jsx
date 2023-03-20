@@ -67,7 +67,7 @@ function Game() {
         sumsVertical={getVerticalSums(cellStates)}
         sumsHorizontal={getHorizontalSums(cellStates)}
         cellClickedCallback={handleCellStateUpdate}
-        levelDoneCallback={() => {}}
+        levelDoneCallback={() => { alert('Level done!'); }}
       />
     </div>
   );
