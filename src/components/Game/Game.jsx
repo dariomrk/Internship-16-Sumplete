@@ -60,7 +60,7 @@ function Game() {
           disabled={(config.columns <= 2 || config.rows <= 2)}
         />
         <Button content="Reset" callback={() => { setCellStates((currentCellStates) => resetCells(currentCellStates)); }} />
-        <Button content="New game" type="danger" />
+        <Button content="New game" type="danger" callback={() => { setCellStates(setupCells(config)); }} />
       </div>
       <Board
         cellStates={cellStates}
