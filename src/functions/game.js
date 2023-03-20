@@ -2,9 +2,9 @@ export const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - m
 
 export const generateCells = (rows, columns) => {
   const cellStates = [];
-  for (let i = 1; i <= rows; i += 1) {
+  for (let i = 0; i < rows; i += 1) {
     const row = [];
-    for (let j = 1; j <= columns; j += 1) {
+    for (let j = 0; j < columns; j += 1) {
       row.push({
         value: 0,
         state: '',
@@ -86,5 +86,17 @@ export const setupCells = ({
     outputCells[i] = flatCells.slice(i * cells[i].length, (i + 1) * cells[i].length);
   }
 
+  return outputCells;
+};
+
+export const resetCells = (cellStates) => {
+  const outputCells = [];
+  for (let i = 0; i < cellStates.length; i += 1) {
+    const row = [];
+    for (let j = 0; j < cellStates[i].length; j += 1) {
+      row.push({ ...cellStates[i][j], state: '' });
+    }
+    outputCells.push(row);
+  }
   return outputCells;
 };

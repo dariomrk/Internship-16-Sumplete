@@ -6,6 +6,7 @@ import {
   getHorizontalSums,
   getNextCellState,
   setupCells,
+  resetCells,
 } from '../../functions/game';
 import './Game.scoped.css';
 
@@ -58,7 +59,7 @@ function Game() {
           callback={() => modifyDifficulty(-1)}
           disabled={(config.columns <= 2 || config.rows <= 2)}
         />
-        <Button content="Restart" />
+        <Button content="Reset" callback={() => { setCellStates((currentCellStates) => resetCells(currentCellStates)); }} />
         <Button content="New game" type="danger" />
       </div>
       <Board
