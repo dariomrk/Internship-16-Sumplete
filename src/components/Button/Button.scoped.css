@@ -3,7 +3,7 @@ button {
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  min-width: 64px;
+  min-width: 72px;
   min-height: 32px;
   border: 0;
   font-weight: 600;
@@ -13,6 +13,12 @@ button {
   color: white;
   background-color: var(--accent);
   cursor: pointer;
+  padding: 8px;
+}
+
+button:disabled {
+  filter: grayscale(1) !important;
+  box-shadow: var(--box-shadow-1) !important;
 }
 
 button:hover {
