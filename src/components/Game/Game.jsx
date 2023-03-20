@@ -46,14 +46,7 @@ function Game() {
   }, [config]);
 
   return (
-    <>
-      <Board
-        cellStates={cellStates}
-        sumsVertical={getVerticalSums(cellStates)}
-        sumsHorizontal={getHorizontalSums(cellStates)}
-        cellClickedCallback={handleCellStateUpdate}
-        levelDoneCallback={() => {}}
-      />
+    <div className="game">
       <div className="game-controls">
         <Button
           content="+ Difficulty"
@@ -68,7 +61,14 @@ function Game() {
         <Button content="Restart" />
         <Button content="New game" type="danger" />
       </div>
-    </>
+      <Board
+        cellStates={cellStates}
+        sumsVertical={getVerticalSums(cellStates)}
+        sumsHorizontal={getHorizontalSums(cellStates)}
+        cellClickedCallback={handleCellStateUpdate}
+        levelDoneCallback={() => {}}
+      />
+    </div>
   );
 }
 
