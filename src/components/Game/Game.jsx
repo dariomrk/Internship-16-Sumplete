@@ -52,12 +52,12 @@ function Game() {
         <Button
           content="+ Difficulty"
           callback={() => modifyDifficulty(1)}
-          disabled={(config.columns >= 10 || config.rows >= 10)}
+          disabled={(config.columns >= 5 || config.rows >= 5)}
         />
         <Button
           content="- Difficulty"
           callback={() => modifyDifficulty(-1)}
-          disabled={(config.columns <= 2 || config.rows <= 2)}
+          disabled={(config.columns <= 3 || config.rows <= 3)}
         />
         <Button content="Reset" callback={() => { setCellStates((currentCellStates) => resetCells(currentCellStates)); }} />
         <Button content="New game" type="danger" callback={() => { setCellStates(setupCells(config)); }} />
