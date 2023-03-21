@@ -13,23 +13,33 @@ import SumCells from '../SumCells';
  * }[][],
  * sumsVertical: {
  *  value: number,
- * id: string,
- * state: 'done' | undefined
+ *  id: string,
+ *  state: 'done' | undefined
  * }[],
  * sumsHorizontal: {
  *  value: number,
  *  id: string,
  *  state: 'done' | undefined
  * }[],
- * callback: (id: string) => void}} props
+ * cellClickedCallback: (id: string) => void,
+ * levelDoneCallback: () => void}} props
  * @returns {JSX.Element}
  */
 function Board({
   cellStates,
   sumsVertical,
   sumsHorizontal,
-  callback,
+  cellClickedCallback,
+  levelDoneCallback,
 }) {
+  const levelDone = ([...sumsVertical, ...sumsHorizontal])
+    .flat()
+    .every(({ state }) => state === 'done');
+
+  if (levelDone) {
+    levelDoneCallback();
+  }
+
   return (
     <div className="board">
       <div className="board-row">
@@ -45,7 +55,7 @@ function Board({
                   state={state}
                   id={id}
                   key={id}
-                  callback={callback}
+                  callback={cellClickedCallback}
                 />
               ))}
             </div>

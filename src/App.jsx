@@ -1,45 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import Board from './components/Board/Board';
-import {
-  getVerticalSums,
-  getHorizontalSums,
-  getNextCellState,
-  setupCells,
-} from './functions/game';
+import React from 'react';
+import './App.scoped.css';
+import Game from './components/Game';
 
 function App() {
-  const [config, setConfig] = useState({
-    rows: 3,
-    columns: 3,
-    minValue: 1,
-    maxValue: 10,
-    minToDelete: 0.4,
-    maxToDelete: 0.6,
-  });
-  const [cellStates, setCellStates] = useState(setupCells(config));
-
-  const handleCellStateUpdate = (id) => {
-    const newCellStates = [...cellStates];
-    newCellStates.forEach((row, i) => {
-      row.forEach((cell, j) => {
-        if (cell.id === id) {
-          const newCell = { ...cell, state: getNextCellState(cell.state) };
-          newCellStates[i][j] = newCell;
-        }
-      });
-    });
-    setCellStates(newCellStates);
-  };
-
   return (
-    <Board
-      cellStates={cellStates}
-      sumsVertical={getVerticalSums(cellStates, false)
-        .map((value, i) => ({ value, id: `vertical-${i}` }))}
-      sumsHorizontal={getHorizontalSums(cellStates, false)
-        .map((value, i) => ({ value, id: `horizontal-${i}` }))}
-      callback={handleCellStateUpdate}
-    />
+    <div className="app">
+      <div className="about">
+        <h1>Sumplete</h1>
+        <p>Delete numbers so each row/column adds up to the target number at the right/bottom.</p>
+      </div>
+      <Game />
+    </div>
   );
 }
 
