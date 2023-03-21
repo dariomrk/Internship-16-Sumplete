@@ -3,14 +3,13 @@
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 64px;
-  margin-bottom: 64px;
+  margin-top: 32px;
   display: flex;
   gap: 32px;
 }
 
 .game-controls {
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: start;
